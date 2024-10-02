@@ -1,7 +1,18 @@
-# 文件结构
+# SUNERP
 
-app: 移动端 app
-mini: 小程序
-service：后端
-web: web 端
-window：桌面端
+一个简单的收银系统
+
+# 文件结构说明
+
+SUNERP
+├── packages
+│ ├── app # app
+│ ├── mini # 小程序
+│ ├── service #服务器
+│ ├── web # web
+│ └── window # 桌面端
+├── lerna.json
+├── LICENSE
+└── README.md
+
+# 功能设计
