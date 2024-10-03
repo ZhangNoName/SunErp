@@ -1,0 +1,20 @@
+.e-header-container {
+  /* height: 100%; */
+  /* width: 100%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 0.1rem solid var(--border-color);
+  .e-header-left {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

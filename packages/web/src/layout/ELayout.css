@@ -1,0 +1,22 @@
+.layout-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+  gap: 1.5rem;
+  .layout-header {
+    width: 100%;
+    height: 7rem;
+  }
+  .layout-main {
+    height: calc(100% - 8.5rem);
+    width: 100%;
+    flex: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
