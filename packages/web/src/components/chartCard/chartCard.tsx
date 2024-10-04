@@ -1,10 +1,17 @@
 import { FC, useState } from "react";
 import "./chartCard.css";
 
-interface ChartCardProps {}
+interface ChartCardProps {
+  title: string;
+}
 
-export const ChartCard: FC<ChartCardProps> = ({}) => {
-  return <div className="chart-card-container"></div>;
+export const ChartCard: FC<ChartCardProps> = ({ title }) => {
+  return (
+    <div className="chart-card-container">
+      <div className="title">{title}</div>
+      <div className="chart"></div>
+    </div>
+  );
 };
 
 export default ChartCard;

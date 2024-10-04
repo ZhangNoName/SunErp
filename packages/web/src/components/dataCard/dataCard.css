@@ -6,4 +6,12 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  gap: 1rem;
+  .data {
+    color: red;
+    font-size: 2rem;
+  }
+  .title {
+    color: var(--font-color);
+  }
 }

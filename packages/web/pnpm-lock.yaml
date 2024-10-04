@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ant-design/colors':
+    specifier: ^7.1.0
+    version: 7.1.0
   '@ant-design/icons':
     specifier: ^5.5.1
     version: 5.5.1(react-dom@18.3.1)(react@18.3.1)

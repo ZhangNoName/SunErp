@@ -1,0 +1,9 @@
+.chart-card-container {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import "./homePage.css";
-import { DataCard } from "@/components";
+import { ChartCard, DataCard } from "@/components";
 
 interface HomePageProps {}
 
@@ -13,7 +13,10 @@ export const HomePage: FC<HomePageProps> = ({}) => {
         <DataCard title="外卖单数" data={123456} />
         <DataCard title="库存预警" data={123456} />
       </div>
-      <div className="data-visual-container"></div>
+      <div className="data-visual-container">
+        <ChartCard title="销售商品类别统计" />
+        <ChartCard title="趋势分析" />
+      </div>
     </div>
   );
 };
