@@ -13,5 +13,6 @@
     justify-content: flex-start;
   }
   .layout-main-content {
+    flex: auto;
   }
 }

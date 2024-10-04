@@ -15,36 +15,42 @@ interface SideMenuProps {}
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
-  { key: "1", icon: <PieChartOutlined />, label: "Option 1" },
-  { key: "2", icon: <DesktopOutlined />, label: "Option 2" },
-  { key: "3", icon: <ContainerOutlined />, label: "Option 3" },
+  { key: "home", icon: <PieChartOutlined />, label: "首页" },
+  { key: "oeder", icon: <DesktopOutlined />, label: "点餐" },
   {
-    key: "sub1",
-    label: "Navigation One",
-    icon: <MailOutlined />,
+    key: "item",
+    icon: <ContainerOutlined />,
+    label: "商品",
     children: [
-      { key: "5", label: "Option 5" },
-      { key: "6", label: "Option 6" },
-      { key: "7", label: "Option 7" },
-      { key: "8", label: "Option 8" },
+      { key: "item-price", label: "价格" },
+      { key: "item-combo", label: "套餐" },
+      { key: "item-promot", label: "活动" },
     ],
   },
   {
-    key: "sub2",
-    label: "Navigation Two",
-    icon: <AppstoreOutlined />,
+    key: "sale",
+    icon: <ContainerOutlined />,
+    label: "订单",
+  },
+  {
+    key: "vip",
+    icon: <ContainerOutlined />,
+    label: "会员",
     children: [
-      { key: "9", label: "Option 9" },
-      { key: "10", label: "Option 10" },
-      {
-        key: "sub3",
-        label: "Submenu",
-        children: [
-          { key: "11", label: "Option 11" },
-          { key: "12", label: "Option 12" },
-        ],
-      },
+      { key: "vip-manage", label: "会员管理" },
+      { key: "vip-config", label: "积分设置" },
+      { key: "vip-event", label: "会员活动" },
     ],
+  },
+  {
+    key: "equip",
+    icon: <ContainerOutlined />,
+    label: "设备",
+  },
+  {
+    key: "system",
+    icon: <ContainerOutlined />,
+    label: "系统设置",
   },
 ];
 export const SideMenu: FC<SideMenuProps> = ({}) => {
