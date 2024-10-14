@@ -1,0 +1,32 @@
+.checked-item-card-container {
+  display: grid;
+  grid-template-columns: 1fr 9rem 10rem 9rem 9rem;
+  grid-template-rows: auto;
+  gap: 1rem;
+  align-items: center;
+  /* place-items: center; */
+  .item-name {
+    place-self: start;
+    overflow: auto;
+    text-wrap: wrap;
+  }
+  .input-count {
+    display: flex;
+    justify-content: center;
+    .input-icon {
+      cursor: pointer;
+      user-select: none;
+      width: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--border-color);
+    }
+  }
+  .item-count,
+  .item-price,
+  .item-discount-price,
+  .item-total-price {
+    place-self: center;
+  }
+}

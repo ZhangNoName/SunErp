@@ -1,0 +1,62 @@
+.order-page-container {
+  width: calc(100% - 3rem);
+  height: calc(100% - 3rem);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-template-rows: 4rem auto;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  .order-pager-header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: auto repeat(6, 5rem);
+    grid-template-rows: auto;
+    gap: 1rem;
+    align-items: center;
+  }
+  .item-list {
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    overflow: auto;
+    /* display: grid; */
+    /* flex-wrap: wrap;
+    justify-content: space-between; 
+    align-items: flex-start;
+    align-content: flex-start; */
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); */
+    grid-template-columns: repeat(auto-fit, 15rem);
+    grid-template-rows: repeat(auto-fit, 15rem);
+    gap: 1rem;
+
+    user-select: none;
+  }
+  .order-summary {
+    padding: 1rem;
+
+    overflow: auto;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.5rem;
+    /* & > :first-child {
+      border-bottom: 1px solid var(--border-color);
+    } */
+    hr {
+      /* color: antiquewhite; */
+      width: 100%;
+      border: 0;
+      height: 2px;
+      background-color: var(--border-color);
+    }
+  }
+  .summary-statistic {
+    height: 5rem;
+    justify-self: flex-end;
+    background-color: antiquewhite;
+  }
+}

@@ -15,16 +15,12 @@
   color: var(--font-color);
 
   --bg-color: #fff;
-  --bg-color-hover: rgba(0, 0, 0, 0.06);
-  --bg-color-active: #fff;
+  --bg-color-hover: #e6f7ff;
+  --bg-color-active: #91d5ff;
 
-  --fill-color: #e7f8ff;
-  --fill-color-hover: #f0f2f5;
-  --fill-color-active: #f0f2f5;
-
-  --border-color: #dcdfe6;
-  --border-color-hover: #ebeef5;
-  --border-color-active: #d4d7de;
+  --border-color: #8c8c8c;
+  --border-color-hover: #595959;
+  --border-color-active: #434343;
 
   --font-color: #606266;
   --font-color-active: #409eff;

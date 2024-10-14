@@ -9,6 +9,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { HomePage, LoginPage } from "./pages";
+import OrderPage from "./pages/order/orderPage";
 function App() {
   const layoutDom = (
     <>
@@ -19,11 +20,10 @@ function App() {
           </aside>
           <div className="layout-main-content">
             <Routes>
-              <Route path="/" element={<Navigate to="/login" replace />} />
-
               <Route path="/home" element={<HomePage />} />
+              <Route path="/order" element={<OrderPage />} />
 
-              <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
           </div>
         </div>

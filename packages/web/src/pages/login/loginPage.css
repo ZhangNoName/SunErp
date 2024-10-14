@@ -10,7 +10,7 @@
   .sign-up-content {
     width: 55rem;
     height: auto;
-    background-color: var(--fill-color);
+    background-color: var(--bg-color);
     border-radius: 1.5rem;
     border: 1px solid var(--border-color);
     padding: 1.5rem;
