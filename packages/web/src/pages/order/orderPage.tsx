@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import "./orderPage.css";
 import { ItemDataTest, ItemMap } from "./oerderPage.data";
 import { ItemCard } from "@/components";
@@ -37,7 +37,11 @@ export const OrderPage: FC<OrderPageProps> = ({}) => {
     );
   };
   const debounceSearch = useCallback(Debounce(searchChange, 500), []);
-
+  const totalPrice = useMemo(() => {
+    return Object.keys(checkedItem).reduce((pre, cur) => {
+      return pre + checkedItem[cur] * ItemMap[cur].discountPrice;
+    }, 0);
+  }, [checkedItem]);
   return (
     <div className="order-page-container">
       <div className="order-pager-header">
@@ -57,6 +61,7 @@ export const OrderPage: FC<OrderPageProps> = ({}) => {
               id={o.id}
               name={o.name}
               price={o.price}
+              discountPrice={o.discountPrice}
               des={o.des}
               onClick={addItem}
             ></ItemCard>
@@ -82,13 +87,21 @@ export const OrderPage: FC<OrderPageProps> = ({}) => {
                 name={ItemMap[key].name}
                 price={ItemMap[key].price}
                 count={checkedItem[key]}
-                discountPrice={ItemMap[key].price}
+                discountPrice={ItemMap[key].discountPrice || ItemMap[key].price}
                 changeNum={changeItemCount}
               />
             );
           })}
         </div>
-        <div className="summary-statistic"></div>
+        <div className="summary-statistic">
+          <div>合计：</div>
+          <div>{totalPrice}</div>
+          <div className="submit-btn-container">
+            <Button className="submit-btn" type="primary">
+              结算
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

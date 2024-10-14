@@ -1,8 +1,8 @@
 .checked-item-card-container {
   display: grid;
-  grid-template-columns: 1fr 9rem 10rem 9rem 9rem;
+  grid-template-columns: 1fr 6rem 10rem 6rem 6rem 4rem;
   grid-template-rows: auto;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
   /* place-items: center; */
   .item-name {

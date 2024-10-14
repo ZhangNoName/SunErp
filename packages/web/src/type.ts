@@ -7,6 +7,8 @@ export interface ItemProps {
   type?: string;
   image?: string;
   price: number;
+  discount?: number;
+  discountPrice: number;
   state?: "enable" | "disable" | "warning";
   stock?: number;
   des?: string;

@@ -31,9 +31,21 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
       icon: <ContainerOutlined />,
       label: "商品",
       children: [
-        { key: "item-price", label: "价格" },
-        { key: "item-combo", label: "套餐" },
-        { key: "item-promot", label: "活动" },
+        {
+          key: "item-price",
+          label: "价格",
+          onClick: () => navigate("/item/price"),
+        },
+        {
+          key: "item-combo",
+          label: "套餐",
+          onClick: () => navigate("/item/combo"),
+        },
+        {
+          key: "item-promot",
+          label: "活动",
+          onClick: () => navigate("/item/promot"),
+        },
       ],
     },
     {
@@ -55,11 +67,13 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
       key: "equip",
       icon: <ContainerOutlined />,
       label: "设备",
+      onClick: () => navigate("/deviceConfig"),
     },
     {
       key: "system",
       icon: <ContainerOutlined />,
       label: "系统设置",
+      onClick: () => navigate("/systemConfig"),
     },
   ];
   const toggleCollapsed = () => {
