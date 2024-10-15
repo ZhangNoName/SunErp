@@ -8,6 +8,7 @@ import {
   InputNumber,
   Modal,
   Radio,
+  RadioChangeEvent,
   Row,
   Select,
   Space,
@@ -24,7 +25,7 @@ import { ItemStateList, ItemTypesList } from "@/util/TestData";
 interface PricePageProps {}
 const InitFormValue = {
   name: "",
-  type: "1",
+  type: "主食",
   price: 1,
   discount: 1,
   discountPrice: 1,
@@ -46,16 +47,16 @@ export const PricePage: FC<PricePageProps> = ({}) => {
     { title: "价格", dataIndex: "price", key: "price" },
     { title: "折扣", dataIndex: "discount", key: "discount" },
     { title: "折后价", dataIndex: "discountPrice", key: "discountPrice" },
-    { title: "库存", dataIndex: "stock", key: "stock" },
-    { title: "上次进货日期", dataIndex: "lastStockDate", key: "lastStockDate" },
+    // { title: "库存", dataIndex: "stock", key: "stock" },
+    // { title: "上次进货日期", dataIndex: "lastStockDate", key: "lastStockDate" },
     // { title: "口味", dataIndex: "address", key: "type" },
+
     { title: "描述", dataIndex: "des", key: "des" },
     {
       title: "操作",
       dataIndex: "",
       key: "x",
       fixed: "right",
-
       render: (text, record, index) => (
         <div className="action-group">
           <a onClick={() => deleteItem(record)}>下架</a>
@@ -69,6 +70,7 @@ export const PricePage: FC<PricePageProps> = ({}) => {
   const [editId, setEditId] = useState<string>("");
   const [modalLoading, setModalLoading] = useState(false);
 
+  const [addCombo, setAddCombo] = useState(false);
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -145,6 +147,14 @@ export const PricePage: FC<PricePageProps> = ({}) => {
     });
   };
 
+  const handleTypeChange = (v: RadioChangeEvent) => {
+    if (v.target.value == "套餐") {
+      setAddCombo(true);
+    } else {
+      setAddCombo(false);
+    }
+  };
+
   return (
     <>
       {contextHolder}
@@ -189,6 +199,7 @@ export const PricePage: FC<PricePageProps> = ({}) => {
               optionType="button"
               buttonStyle="solid"
               options={ItemTypesList}
+              onChange={handleTypeChange}
             />
           </Form.Item>
           <Form.Item name="price" label="价格">

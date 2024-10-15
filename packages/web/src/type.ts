@@ -20,3 +20,13 @@ export interface ItemProps {
 export interface ItemCardProps extends ItemProps {
   onClick?: Function;
 }
+
+export interface PromotTypes {
+  id: string;
+  name: string;
+  state: "进行中" | "等待" | "结束";
+  type: "单次" | "多次";
+  startDate: string;
+  endDate: string;
+  items: [];
+}
