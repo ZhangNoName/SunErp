@@ -35,7 +35,9 @@ const InitFormValue = {
 };
 export const PricePage: FC<PricePageProps> = ({}) => {
   const [api, contextHolder] = notification.useNotification();
+
   const [form] = Form.useForm();
+
   const columns: TableColumnsType<PriceTableDataType> = [
     { title: "名称", dataIndex: "name", key: "id", fixed: "left" },
     { title: "照片", dataIndex: "image", key: "image" },
@@ -54,15 +56,17 @@ export const PricePage: FC<PricePageProps> = ({}) => {
       key: "x",
       fixed: "right",
 
-      render: () => (
+      render: (text, record, index) => (
         <div className="action-group">
-          <a onClick={deleteItem}>下架</a>
-          <a onClick={editItem}>修改</a>
+          <a onClick={() => deleteItem(record)}>下架</a>
+          <a onClick={() => editItem(record)}>修改</a>
         </div>
       ),
     },
   ];
   const [modalOpen, setModalOpen] = useState(true);
+  const [modalTitle, setModalTitle] = useState("添加商品");
+  const [editId, setEditId] = useState<string>("");
   const [modalLoading, setModalLoading] = useState(false);
 
   const closeModal = () => {
@@ -83,13 +87,22 @@ export const PricePage: FC<PricePageProps> = ({}) => {
         // closeModal();
       });
   };
-  const editItem = () => {
+  const editItem = (item: PriceTableDataType) => {
     console.log("editItem");
+    setModalTitle("修改商品");
+    setEditId(item.id);
+    form.setFieldsValue({
+      ...item,
+    });
     setModalOpen(true);
   };
-  const deleteItem = () => {
+  const addItem = () => {
+    setModalTitle("添加商品");
+    setModalOpen(true);
+  };
+  const deleteItem = (item: PriceTableDataType) => {
     api.warning({
-      message: "确认下架该商品？",
+      message: `确认下架商品${item.name}？`,
       description: "下架之后无法出售，确定删除吗？",
       btn: (
         <Space>
@@ -137,7 +150,7 @@ export const PricePage: FC<PricePageProps> = ({}) => {
       {contextHolder}
 
       <Modal
-        title="编辑商品"
+        title={modalTitle}
         width="55rem"
         open={modalOpen}
         onCancel={closeModal}
@@ -202,6 +215,12 @@ export const PricePage: FC<PricePageProps> = ({}) => {
       <div className="price-page-container">
         <div className="header">
           <Input></Input>
+          <Button type="primary" onClick={addItem}>
+            添加套餐
+          </Button>
+          <Button type="primary" onClick={addItem}>
+            添加商品
+          </Button>
         </div>
         <div className="content">
           <Table<PriceTableDataType>
