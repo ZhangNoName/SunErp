@@ -11,6 +11,7 @@ export interface ItemProps {
   discountPrice: number;
   state?: "enable" | "disable" | "warning";
   stock?: number;
+  lastStockDate?: string;
   des?: string;
 }
 /**
