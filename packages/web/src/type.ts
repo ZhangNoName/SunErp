@@ -1,3 +1,5 @@
+export type ItemStateType = "enable" | "disable" | "warning";
+
 /**
  * 商品的属性
  */
@@ -9,7 +11,7 @@ export interface ItemProps {
   price: number;
   discount?: number;
   discountPrice: number;
-  state?: "enable" | "disable" | "warning";
+  state?: ItemStateType;
   stock?: number;
   lastStockDate?: string;
   des?: string;
@@ -20,6 +22,18 @@ export interface ItemProps {
 export interface ItemCardProps extends ItemProps {
   onClick?: Function;
 }
+export interface PromotItemTableColumnTypes {
+  id: string;
+  name: string;
+  price: number;
+  discount?: number;
+  discountPrice: number;
+  state?: ItemStateType;
+}
+export interface PromotItem {
+  id: string;
+  count: number;
+}
 
 export interface PromotTypes {
   id: string;
@@ -28,5 +42,5 @@ export interface PromotTypes {
   type: "单次" | "多次";
   startDate: string;
   endDate: string;
-  items: [];
+  items: PromotItem[];
 }
