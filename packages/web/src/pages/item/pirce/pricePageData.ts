@@ -1,5 +1,5 @@
-import { ItemDataTest } from "@/pages/order/oerderPage.data";
 import { ItemProps } from "@/type";
+import { ItemDataTest } from "@/util/TestData";
 
 export interface PriceTableDataType extends ItemProps {
   key: React.Key;

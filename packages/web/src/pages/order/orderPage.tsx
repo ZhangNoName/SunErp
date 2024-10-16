@@ -1,12 +1,13 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import "./orderPage.css";
-import { ItemDataTest, ItemMap } from "./oerderPage.data";
+import { ItemMap } from "./orderPage.data";
 import { ItemCard } from "@/components";
 import { Button, Input, InputNumber } from "antd";
 import { ItemProps } from "@/type";
 import { Debounce } from "@/util/functions";
 import { PlusCircleFilled } from "@ant-design/icons";
 import CheckedItemCard from "@/components/checkedItemCard/checkedItemCard";
+import { ItemDataTest } from "@/util/TestData";
 
 interface OrderPageProps {}
 
