@@ -1,4 +1,4 @@
-import { FC, hasOwnProperty, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import "./promotPage.css";
 import {
   Input,
@@ -17,17 +17,18 @@ import {
   Col,
   Select,
   Checkbox,
+  DatePicker,
 } from "antd";
 import { PriceTableDataType } from "../pirce/pricePageData";
 import { PromotTypes } from "@/type";
-import { ItemDataTest, PromotTypeList } from "@/util/TestData";
+import { ItemDataTest, PromotTypeList, WeekDayList } from "@/util/TestData";
 import TextArea from "antd/es/input/TextArea";
 import { useWatch } from "antd/es/form/Form";
-
+const { RangePicker } = DatePicker;
 interface PromotPageProps {}
 const InitFormValue = {
   name: "",
-  type: "",
+  type: "once",
   price: 0,
   discount: 0,
   discountPrice: 0,
@@ -139,6 +140,9 @@ export const PromotPage: FC<PromotPageProps> = ({}) => {
       .validateFields()
       .then(async (res) => {
         console.log("创建活动表单校验", res);
+        const startTime = res.time[0].format("YYYY-MM-DD");
+        // const endTime = res.time[1].format("YYYY-MM-DD");
+        console.log("活动起止时间", startTime);
       })
       .catch((e) => {
         console.log("创建活动失败", e);
@@ -196,14 +200,14 @@ export const PromotPage: FC<PromotPageProps> = ({}) => {
   const handleDiscountPriceChange = (value: any) => {
     const price = form.getFieldValue("price") || 1;
     form.setFieldsValue({
-      discount: price / value,
+      discount: (price / value).toFixed(2),
     });
   };
 
   const handleDiscountChange = (value: any) => {
     const price = form.getFieldValue("price");
     form.setFieldsValue({
-      discountPrice: price * value,
+      discountPrice: (price * value).toFixed(2),
     });
   };
   const handleItemsChange = (value: string[]) => {
@@ -280,6 +284,39 @@ export const PromotPage: FC<PromotPageProps> = ({}) => {
               onChange={handleTypeChange}
             />
           </Form.Item>
+          <Form.Item
+            shouldUpdate={(prevValues, currentValues) =>
+              prevValues.type !== currentValues.type
+            }
+            label="活动时间"
+          >
+            {({ getFieldValue }) => {
+              const type = getFieldValue("type");
+              return (
+                <Form.Item>
+                  {type === "once" ? (
+                    <Form.Item name="time">
+                      <RangePicker format="YYYY-MM-DD" />
+                    </Form.Item>
+                  ) : (
+                    <>
+                      <Form.Item name="time">
+                        <RangePicker
+                          format="YYYY-MM-DD"
+                          allowEmpty={[false, true]}
+                          placeholder={["", "永久"]}
+                        />
+                      </Form.Item>
+                      <Form.Item name="week">
+                        <Checkbox.Group options={WeekDayList}></Checkbox.Group>
+                      </Form.Item>
+                    </>
+                  )}
+                </Form.Item>
+              );
+            }}
+          </Form.Item>
+
           <Form.Item name="items" label="商品">
             <Checkbox.Group options={ItemList} onChange={handleItemsChange} />
           </Form.Item>
@@ -292,12 +329,23 @@ export const PromotPage: FC<PromotPageProps> = ({}) => {
               </Col>
               <Col span={8}>
                 <Form.Item name="discount" label="折扣">
-                  <InputNumber min={0} onChange={handleDiscountChange} />
+                  <InputNumber
+                    min={0}
+                    step={0.05}
+                    max={1}
+                    precision={2}
+                    onChange={handleDiscountChange}
+                  />
                 </Form.Item>
               </Col>
               <Col span={8}>
                 <Form.Item name="discountPrice" label="折后价格">
-                  <InputNumber onChange={handleDiscountPriceChange} />
+                  <InputNumber
+                    min={0}
+                    step={1}
+                    precision={2}
+                    onChange={handleDiscountPriceChange}
+                  />
                 </Form.Item>
               </Col>
             </Row>

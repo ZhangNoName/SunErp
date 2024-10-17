@@ -4,7 +4,37 @@ export interface ItemTypes {
   label: string;
   value: string;
 }
-
+export const WeekDay = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+export const WeekDayList = [
+  {
+    label: "周一",
+    value: "Monday",
+  },
+  {
+    label: "周二",
+    value: "Tuesday",
+  },
+  {
+    label: "周三",
+    value: "Wednesday",
+  },
+  {
+    label: "周四",
+    value: "Thursday",
+  },
+  {
+    label: "周五",
+    value: "Friday",
+  },
+  {
+    label: "周六",
+    value: "Saturday",
+  },
+  {
+    label: "周日",
+    value: "Sunday",
+  },
+];
 export const ItemTypesList = ["主食", "小食", "饮料", "赠品", "披萨", "套餐"];
 export const ItemStateList: ItemTypes[] = [
   {
@@ -21,7 +51,16 @@ export const ItemStateList: ItemTypes[] = [
   },
 ];
 
-export const PromotTypeList = ["仅一次", "每天", "自定义"];
+export const PromotTypeList = [
+  {
+    label: "仅一次",
+    value: "once",
+  },
+  {
+    label: "多次",
+    value: "everyday",
+  },
+];
 export const ItemDataTest: ItemProps[] = [
   {
     id: "1",

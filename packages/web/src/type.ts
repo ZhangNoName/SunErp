@@ -44,3 +44,12 @@ export interface PromotTypes {
   endDate: string;
   items: PromotItem[];
 }
+export interface ComboTypes {
+  id: string;
+  name: string;
+  state: "进行中" | "等待" | "结束";
+  type: "单次" | "多次";
+  startDate: string;
+  endDate: string;
+  items: PromotItem[];
+}
