@@ -15,6 +15,7 @@ import DevicePage from "./pages/device/devicePage";
 import PromotPage from "./pages/item/promot/promotPage";
 import ComboPage from "./pages/item/combo/comboPage";
 import PricePage from "./pages/item/pirce/pricePage";
+import RecordPage from "./pages/record/recordPage";
 function App() {
   const layoutDom = (
     <>
@@ -31,6 +32,7 @@ function App() {
               <Route path="/item/price" element={<PricePage />} />
               <Route path="/item/combo" element={<ComboPage />} />
               <Route path="/item/promot" element={<PromotPage />} />
+              <Route path="/record" element={<RecordPage />} />
 
               <Route path="/deviceConfig" element={<DevicePage />} />
               <Route path="/systemConfig" element={<SettingPage />} />

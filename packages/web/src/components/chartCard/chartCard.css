@@ -2,8 +2,15 @@
   border: 1px solid var(--border-color);
   border-radius: 1rem;
   padding: 1.5rem;
-  .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  .chart-card-title {
     font-size: 2.5rem;
     font-weight: 700;
+  }
+  .chart-card-chart {
+    flex: 1;
   }
 }

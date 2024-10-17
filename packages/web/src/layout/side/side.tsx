@@ -52,6 +52,7 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
       key: "sale",
       icon: <ContainerOutlined />,
       label: "订单",
+      onClick: () => navigate("/record"),
     },
     {
       key: "vip",

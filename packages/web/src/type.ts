@@ -53,3 +53,16 @@ export interface ComboTypes {
   endDate: string;
   items: PromotItem[];
 }
+
+export interface RecordTableColumnTypes {
+  id: string;
+  time: string;
+  state: "进行中" | "等待" | "结束";
+  vip: string;
+  items: any;
+  totalPrice: number;
+  payMethod: string;
+  payState: string;
+  payTime: string;
+  payMoney: number;
+}
