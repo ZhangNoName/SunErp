@@ -1,0 +1,17 @@
+.device-card-container {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+  .data {
+    color: red;
+    font-size: 2rem;
+  }
+  .title {
+    color: var(--font-color);
+  }
+}

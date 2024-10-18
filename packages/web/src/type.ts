@@ -57,6 +57,7 @@ export interface ComboTypes {
 export interface RecordTableColumnTypes {
   id: string;
   time: string;
+  type: "堂食" | "外卖";
   state: "进行中" | "等待" | "结束";
   vip: string;
   items: any;

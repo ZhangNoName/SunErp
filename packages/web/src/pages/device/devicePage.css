@@ -1,0 +1,9 @@
+.device-page-container {
+  width: calc(100% - 3rem);
+  height: calc(100% - 3rem);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
+  gap: 1.5rem;
+}
