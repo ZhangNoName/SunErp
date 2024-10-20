@@ -13,6 +13,7 @@ export const DevicePage: FC<DevicePageProps> = ({}) => {
       <DeviceCard name="音响" state="启用"></DeviceCard>
       <DeviceCard name="扫码枪" state="启用"></DeviceCard>
       <DeviceCard name="外接屏幕" state="启用"></DeviceCard>
+      <DeviceCard name="路由器" state="启用"></DeviceCard>
     </div>
   );
 };

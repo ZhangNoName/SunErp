@@ -1,0 +1,29 @@
+.vip-manage-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.5rem;
+  .chart {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15rem 1fr;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    .ant-table-wrapper {
+      flex: 1;
+      .action-group {
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+      }
+    }
+  }
+}
