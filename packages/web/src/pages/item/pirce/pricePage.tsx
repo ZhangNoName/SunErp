@@ -223,7 +223,7 @@ export const PricePage: FC<PricePageProps> = ({}) => {
           </Form.Item>
         </Form>
       </Modal>
-      <div className="price-page-container">
+      <div className="price-page-container page-container">
         <div className="header">
           <Input></Input>
           <Button type="primary" onClick={addItem}>

@@ -1,3 +1,5 @@
+import { count } from "echarts/types/src/component/dataZoom/history.js";
+
 export type ItemStateType = "enable" | "disable" | "warning";
 
 /**
@@ -66,4 +68,26 @@ export interface RecordTableColumnTypes {
   payState: string;
   payTime: string;
   payMoney: number;
+}
+export interface DeliveryInfo {
+  id: string;
+  name: string;
+  phone: string;
+  address: string;
+}
+export interface VipTableColumnTypes {
+  id: string; //id
+  name: string; //姓名
+  state: "使用中" | "停用";
+  level: string; //等级
+  phone: string; // 手机
+  address: string; // 地址
+  balance: number; //余额
+  totalBalance: number; //总额
+  points: number; // 可用积分
+  totalPoints: number; // 总积分
+  createTime: string; //创建时间
+  lastTime: string; //上次使用时间
+  transactionCount: string; //消费笔数
+  deliveryInfo?: DeliveryInfo[];
 }

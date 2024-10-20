@@ -44,7 +44,7 @@ export const OrderPage: FC<OrderPageProps> = ({}) => {
     }, 0);
   }, [checkedItem]);
   return (
-    <div className="order-page-container">
+    <div className="order-page-container page-container">
       <div className="order-pager-header">
         <Input placeholder="搜索商品" onChange={debounceSearch}></Input>
         <Button>清空</Button>

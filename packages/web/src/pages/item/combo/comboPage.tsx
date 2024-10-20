@@ -332,7 +332,7 @@ export const ComboPage: FC<ComboPageProps> = ({}) => {
           </Form.Item>
         </Form>
       </Modal>
-      <div className="combo-page-container">
+      <div className="combo-page-container page-container">
         <div className="header">
           <Input></Input>
           <Button type="primary" onClick={addcombo}>

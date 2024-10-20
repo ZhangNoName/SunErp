@@ -4,7 +4,7 @@ import "./settingPage.css";
 interface SettingPageProps {}
 
 export const SettingPage: FC<SettingPageProps> = ({}) => {
-  return <div className="setting-page-container"></div>;
+  return <div className="setting-page-container page-container"></div>;
 };
 
 export default SettingPage;

@@ -43,7 +43,7 @@ export const RecordPage: FC<RecordPageProps> = ({}) => {
   ];
   const openDeatil = (record: RecordTableColumnTypes) => {};
   return (
-    <div className="record-page-container">
+    <div className="record-page-container page-container">
       <div className="chart">
         <DataCard title="当天营业额" data={1000} />
         <DataCard title="当天订单数" data={1000} />

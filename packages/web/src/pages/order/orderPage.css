@@ -1,12 +1,10 @@
 .order-page-container {
-  width: calc(100% - 3rem);
-  height: calc(100% - 3rem);
   overflow: hidden;
   display: grid;
   grid-template-columns: 6fr 4fr;
   grid-template-rows: 4rem auto;
   gap: 1.5rem;
-  padding: 1.5rem;
+
   .order-pager-header {
     grid-column-start: 1;
     grid-column-end: 3;

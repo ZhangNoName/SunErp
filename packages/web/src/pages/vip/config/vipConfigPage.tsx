@@ -4,7 +4,7 @@ import "./vipConfigPage.css";
 interface VipConfigPageProps {}
 
 export const VipConfigPage: FC<VipConfigPageProps> = ({}) => {
-  return <div className="vip-config-page-container"></div>;
+  return <div className="vip-config-page-container page-container"></div>;
 };
 
 export default VipConfigPage;

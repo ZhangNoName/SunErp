@@ -362,7 +362,7 @@ export const PromotPage: FC<PromotPageProps> = ({}) => {
           </Form.Item>
         </Form>
       </Modal>
-      <div className="promot-page-container">
+      <div className="promot-page-container page-container">
         <div className="header">
           <Input></Input>
           <Button type="primary" onClick={addPromot}>
