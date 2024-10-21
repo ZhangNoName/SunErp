@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useMount } from "ahooks";
+import EventBus from "@/util/eventEmitter";
 
 interface SideMenuProps {}
 type MenuItem = Required<MenuProps>["items"][number];
@@ -23,7 +24,12 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const items: MenuItem[] = [
-    { key: "home", icon: <PieChartOutlined />, label: "首页" },
+    {
+      key: "home",
+      icon: <PieChartOutlined />,
+      label: "首页",
+      onClick: () => navigate("/home"),
+    },
     {
       key: "order",
       icon: <DesktopOutlined />,
@@ -97,9 +103,17 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
     // console.log("info", info);
     setOpenKeys(info);
   };
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
+  const toggleCollapse = () => {
+    setCollapsed((prevCollapsed) => {
+      return !prevCollapsed;
+    });
   };
+  useEffect(() => {
+    EventBus.on("collapse-menu", toggleCollapse);
+    return () => {
+      EventBus.off("collapse-menu", toggleCollapse);
+    };
+  }, []);
   useMount(() => {
     const path = window.location.pathname.split("/");
     path.shift();
@@ -109,9 +123,6 @@ export const SideMenu: FC<SideMenuProps> = ({}) => {
   });
   return (
     <div className="side-menu-container">
-      <div className="collapse-btn" onClick={toggleCollapsed}>
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </div>
       <div className="side-menu">
         <Menu
           // defaultSelectedKeys={defaultSelectedKeys}
