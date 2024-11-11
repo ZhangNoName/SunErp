@@ -1,0 +1,11 @@
+.vip-recharge-modal-container {
+  .recharge-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+  .recharge-info {
+    margin-top: 1.5rem;
+  }
+}
