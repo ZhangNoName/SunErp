@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "erp-end"
+version = "0.1.0"
+description = ""
+authors = ["ZXY"]
+readme = "README.md"
+packages = [{ include = "src" }]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic-core = "^2.23.3"
+h11 = "^0.14.0"
+fastapi = "^0.114.1"
+uvicorn = "^0.30.6"
+aioredis = "^2.0.1"
+redis = "^5.0.8"
+motor = "^3.5.1"
+loguru = "^0.7.2"
+numpy = "^2.1.1"
+pyyaml = "^6.0.2"
+pymysql = "^1.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
