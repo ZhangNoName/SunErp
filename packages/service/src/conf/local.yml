@@ -1,0 +1,22 @@
+# memory_folder: ./src/database/memory
+# conversation: ./src/database/conversation/conversation.pkl
+
+redis:
+  auth: zxy@blog
+  ip: localhost
+  port: 6379
+  db: 0
+
+mongo:
+  ip: localhost
+  port: 27017
+  db: sun_world
+  user: blog
+  passwd: zxy@blog
+
+mysql:
+  ip: localhost
+  port: 3306
+  db: blog
+  user: blog
+  passwd: Zxy@020206
