@@ -1,15 +1,14 @@
 # main.py
 from fastapi.responses import RedirectResponse
 from app_instance import app  # Import the app instance
-from src.routers import blog_router,base_router,user_router
+from src.routers import order_router,user_router
 
 @app.get("/")
 async def redirect_root_to_docs():
     return RedirectResponse("/docs")
 
 routers = [
-    blog_router,
-    base_router,
+    order_router,
     user_router
 ]
 

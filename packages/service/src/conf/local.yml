@@ -3,20 +3,13 @@
 
 redis:
   auth: zxy@blog
-  ip: localhost
+  ip: 81.70.43.189
   port: 6379
   db: 0
 
-mongo:
-  ip: localhost
-  port: 27017
-  db: sun_world
-  user: blog
-  passwd: zxy@blog
-
 mysql:
-  ip: localhost
+  ip: 81.70.43.189
   port: 3306
-  db: blog
+  db: erp
   user: blog
   passwd: Zxy@020206

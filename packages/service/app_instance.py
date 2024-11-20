@@ -5,11 +5,10 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from loguru import logger
 from fastapi.middleware.cors import CORSMiddleware
-from src.controller.blog_manage import BlogManager
+from src.controller.order_manage import OrderManager
 from src.controller.user_manage import UserManager
-from src.database.mongo.mongodb_manage import MongoDBManager
-from src.database.mysql.mysql_manage import MySQLManager
-from src.database.redis.redis_manage import RedisManager
+from src.db.mysql.mysql_manage import MySQLManager
+from src.db.redis.redis_manage import RedisManager
 
 class Application(FastAPI):
     def __init__(self, **args):
@@ -24,11 +23,10 @@ class Application(FastAPI):
 
     def init(self, env='dev'):
         self.load_config(env=env)
-        self.__init__mongoDB()
         self.__init__redis()
         self.__init__mysql()
-        self.__init_blog_manager()
         self.__init_user_manager()
+        self.__init_order_manager()
         logger.info(f'当前模式为{env}')
         if env == 'local':
             pass
@@ -58,6 +56,8 @@ class Application(FastAPI):
         self.mysql = MySQLManager(host=self.config['mysql']['ip'], port=self.config['mysql']['port'], db=self.config['mysql']['db'], user=self.config['mysql']['user'], passwd=self.config['mysql']['passwd'])
     def __init_user_manager(self):
         self.user = UserManager(db=self.mysql)
+    def __init_order_manager(self):
+        self.order = OrderManager(db=self.mysql)
         
 
 @asynccontextmanager

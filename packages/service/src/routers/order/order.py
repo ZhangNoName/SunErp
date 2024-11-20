@@ -1,102 +1,46 @@
-import uuid
-from fastapi import APIRouter, Depends, HTTPException, status
-from loguru import logger
-from pydantic import BaseModel
-from src.controller.user_manage import UserManager
+from fastapi import APIRouter, Depends, HTTPException, Query
+from typing import List
 from app_instance import app
-from src.type.user_type import User
+from src.controller.order_manage import OrderManager
+from src.db.mysql.mysql_manage import MySQLManager
+from src.type.order_type import OrderCreate, OrderUpdate
 from src.type.type import ResponseModel
 
-
 # 创建用户 API 路由
-router = APIRouter(prefix="/user",tags=["user"])
+router = APIRouter(prefix="/order",tags=["订单"])
 
 # 注入 UserManager 依赖
-def get_user_manager() -> UserManager:
+def get_user_manager() -> OrderManager:
     if not hasattr(app, 'user'):
         raise HTTPException(status_code=500, detail="User manager not initialized")
-    return app.user
+    return app.order
 
-# 创建新用户
-@router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_user(user: User, user_manager: UserManager = Depends(get_user_manager)):
-    """
-    创建新的用户
+@router.post("/", response_model=ResponseModel)
+async def create_order(order: OrderCreate,order_manager: OrderManager = Depends(get_user_manager)):
+    try:
+        order_id = order_manager.add_order(order)
+        return ResponseModel(code=0, data={"order_id": order_id}, message="订单创建成功")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
-    Args:
-        user (User): 新用户的数据模型
+@router.get("/{order_id}", response_model=ResponseModel)
+async def get_order(order_id: int,order_manager: OrderManager = Depends(get_user_manager)):
+    order = order_manager.get_order_details(order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="订单不存在")
+    return ResponseModel(code=0, data=order, message="查询成功")
 
-    Returns:
-        dict: 包含新用户 ID 的字典
-    """
-    logger.info(f'接收到的参数：{user}')
-    
-    res = user_manager.create_user(user)
-    logger.success(f'创建结果{res}')
-    if res:
-        return ResponseModel(code=1, data={"id": user.id}, message="创建成功")
-    else:
-        return ResponseModel(code=0, data=None, message="创建失败")
+@router.patch("/{order_id}", response_model=ResponseModel)
+async def update_order(order_id: int, updates: OrderUpdate,order_manager: OrderManager = Depends(get_user_manager)):
+    order_manager.update_order(order_id, updates)
+    return ResponseModel(code=0, data={}, message="订单更新成功")
 
-# 根据id获取指定用户
-@router.get("/{user_id}")
-async def get_user(user_id: str, user_manager: UserManager = Depends(get_user_manager)):
-    """
-    获取指定 ID 的用户
-
-    Args:
-        user_id (str): 用户的 ID
-
-    Returns:
-        User: 用户对象，如果不存在则抛出 404 错误
-    """
-    user = user_manager.get_user_by_id(user_id)
-    logger.info(f'查找的结果-----{user}')
-    
-    if not user:
-        return ResponseModel(code=0, data=None, message="用户不存在")
-
-    # user_dict = {item[0]: item[1] for item in user}
-
-    return ResponseModel(code=1, data=user, message="获取成功")
-
-# 分页获取用户
-@router.get("/")
-async def get_users_paginated(
-    page: int = 1,
-    page_size: int = 10,
-    user_manager: UserManager = Depends(get_user_manager)
+@router.get("/", response_model=ResponseModel)
+async def list_orders(
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(10, ge=1, le=100, description="每页数量"),
+    sort_by: str = Query("created_time", description="排序字段"),
+    order_manager: OrderManager = Depends(get_user_manager)
 ):
-    """
-    分页获取用户列表
-
-    Args:
-        page (int, optional): 页码. Defaults to 1.
-        page_size (int, optional): 每页显示数量. Defaults to 10.
-        user_manager (UserManager, optional): 用户管理对象. Defaults to Depends(get_user_manager).
-
-    Returns:
-        dict: 包含分页信息的字典
-    """
-
-    users = user_manager.get_user_by_name('',page, page_size)
-    return ResponseModel(code=1, data=users, message="获取成功")
-
-
-# 删除指定用户
-@router.delete("/{user_id}")
-async def delete_user(user_id: str, user_manager: UserManager = Depends(get_user_manager)):
-    """
-    停用指定 ID 的用户
-
-    Args:
-        user_id (str): 用户的 ID
-
-    Returns:
-        dict: 包含停用成功消息的字典
-    """
-    res = user_manager.delete_user(user_id)
-    # logger.info(f'停用用户的结果:{res}')
-    if not res:
-        return ResponseModel(code=0, data=False, message="用户不存在")
-    return ResponseModel(code=1, data=True, message="停用成功")
+    orders = order_manager.query_orders(sort_by, page, page_size)
+    return ResponseModel(code=0, data=orders, message="查询成功")
