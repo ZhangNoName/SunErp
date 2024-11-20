@@ -2,11 +2,30 @@ from typing import Any, List, Optional, Dict
 from pymysql import IntegrityError
 
 from src.db.mysql.mysql_manage import MySQLManager
-from src.type.order_type import OrderCreate, OrderUpdate
+from src.type.order_type import OrderCreate, OrderItem, OrderUpdate
 
 class OrderManager:
+    all_attr = ['order_id', 'user_id', 'total_price', 'discount', 'final_price', 'payment_method', 'created_time', 'updated_time', 'state', 'is_active']
+    all_item_attr = ["id","order_id","item_id","item_name","count","price"]
     def __init__(self, db: MySQLManager):
         self.db = db
+        
+    def get_all_order_attr(self) -> str:
+        """
+        获取全部的用户名字段的字符串
+        
+        Returns:
+            属性字符串，以逗号分隔
+        """
+        return ",".join(self.all_attr)
+    def get_all_order_item_attr(self) -> str:
+        """
+        获取全部的用户名字段的字符串
+        
+        Returns:
+            属性字符串，以逗号分隔
+        """
+        return ",".join(self.all_item_attr)
 
     def add_order(self, order: OrderCreate) -> int:
         """
@@ -42,13 +61,20 @@ class OrderManager:
         """
         根据订单ID查询详情及物品数目
         """
-        order_sql = "SELECT * FROM orders WHERE order_id = %s"
-        items_sql = "SELECT * FROM order_items WHERE order_id = %s"
-        order = self.db.fetch_one(order_sql, (order_id,))
+        order_sql = f"SELECT {self.get_all_order_attr()} FROM orders WHERE order_id = %s"
+        items_sql = f"SELECT {self.get_all_order_item_attr()} FROM order_items WHERE order_id = %s"
+        order_row = self.db.fetch_one(order_sql, (order_id,))
         items = self.db.execute(items_sql, (order_id,))
-        if order:
-            order["items"] = items
-        return order
+        
+        if order_row:
+            # 将 tuple 转为 dict
+            order = dict(zip(self.all_attr, order_row))
+            # 将 items 转为对象列表
+            order["items"] = [OrderItem(**dict(zip(self.all_item_attr, row))) for row in items]
+            return order
+        
+        return None
+
 
     def update_order(self, order_id: int, updates: OrderUpdate):
         """
