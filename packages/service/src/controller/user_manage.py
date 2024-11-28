@@ -35,9 +35,14 @@ class UserManager:
         val = (user.user_name,user.name, user.age, user.phone, user.email, user.passwd, user.birth_day)
         try:
             # self.db.execute(sql, [val])
-            res = self.db.execute(sql,val)
-            logger.info(f"用户创建成功{res}")
-            return True
+            # 连接数据库（假设已建立连接）
+            # res = self.db.execute(sql,val)
+            cursor = self.db.cursor
+            cursor.execute(sql, val)
+            # 获取插入行的 ID
+            user_id = cursor.lastrowid
+            logger.info(f"用户创建成功{user_id}")
+            return user_id
         except Exception as e:
             logger.error(f"Error occurred: {e}")
             return False

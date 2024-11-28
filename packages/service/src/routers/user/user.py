@@ -34,7 +34,7 @@ async def create_user(user: User, user_manager: UserManager = Depends(get_user_m
     res = user_manager.create_user(user)
     logger.success(f'创建结果{res}')
     if res:
-        return ResponseModel(code=1, data={"id": user.id}, message="创建成功")
+        return ResponseModel(code=1, data={"id": res}, message="创建成功")
     else:
         return ResponseModel(code=0, data=None, message="创建失败")
 
