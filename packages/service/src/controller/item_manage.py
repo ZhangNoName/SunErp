@@ -1,4 +1,6 @@
-from type.item_type import Item
+from typing import Any, Dict, List, Optional
+from src.db.mysql.mysql_manage import MySQLManager
+from src.type.item_type import Item
 
 
 class ItemManager:
@@ -12,14 +14,23 @@ class ItemManager:
         get_all_items() -> list[Item]: 获取所有商品信息
     """
     table_name = "item"
+    all_attr = ['id', 'name', 'is_combo', 'price', 'discount', 'des', 'create_time', 'start_time', 'end_time']
 
-    def __init__(self, db):
+    def __init__(self, db:MySQLManager):
         """
         初始化商品管理类
         Args:
             db (MySQLManager): 数据库管理类实例
         """
         self.db = db
+    def get_all_item_attr(self) -> str:
+        """
+        获取全部的字段的字符串
+        
+        Returns:
+            属性字符串，以逗号分隔
+        """
+        return ",".join(self.all_attr)
 
     def add_item(self, item: Item) -> int:
         """
@@ -72,9 +83,23 @@ class ItemManager:
         Returns:
             Optional[Item]: 商品对象或None
         """
-        sql = f"SELECT id, name, is_combo, price, discount, des, create_time, start_time, end_time FROM {self.table_name} WHERE id=%s"
-        row = self.db.fetch_one(sql, (item_id,))
-        return Item(**row) if row else None
+        sql = f"SELECT {self.get_all_item_attr()} FROM {self.table_name} WHERE id=%s"
+        result = self.db.fetch_one(sql, (item_id,))
+        
+        # 检查是否查询到结果
+        if not result:
+            return None
+
+        # 查询结果是字典形式
+        if isinstance(result, dict):
+            item_data = result
+        else:
+            # 如果是元组形式，手动构造字典
+            item_data = dict(zip(self.all_attr, result))
+        
+        # 转换为 Item 对象并返回
+        return Item(**item_data)
+
 
     def get_all_items(self) -> list[Item]:
         """
@@ -82,6 +107,19 @@ class ItemManager:
         Returns:
             list[Item]: 商品对象列表
         """
-        sql = f"SELECT id, name, is_combo, price, discount, des, create_time, start_time, end_time FROM {self.table_name}"
+        sql = f"SELECT {self.get_all_item_attr()} FROM {self.table_name}"
         rows = self.db.execute(sql)
         return [Item(**row) for row in rows]
+
+    def query_items(self, sort_by: str, page: int, page_size: int) -> List[Dict[str, Any]]:
+        """
+        按字段排序分页查询订单
+        """
+        offset = (page - 1) * page_size
+        sql = f"""
+        SELECT * FROM {self.table_name}
+        ORDER BY {sort_by}
+        LIMIT %s OFFSET %s
+        """
+        items =  self.db.execute(sql, (page_size, offset))
+        return [Item(**dict(zip(self.all_attr, row))) for row in items]
