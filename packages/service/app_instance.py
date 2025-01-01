@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from loguru import logger
 from fastapi.middleware.cors import CORSMiddleware
+from src.controller.import_manage import ImportManager
 from src.controller.item_manage import ItemManager
 from src.controller.order_manage import OrderManager
 from src.controller.user_manage import UserManager
@@ -29,6 +30,7 @@ class Application(FastAPI):
         self.__init_user_manager()
         self.__init_order_manager()
         self.__init_item_manager()
+        self.__init_import_item_manager()
         logger.info(f'当前模式为{env}')
         if env == 'local':
             pass
@@ -62,6 +64,8 @@ class Application(FastAPI):
         self.order = OrderManager(db=self.mysql)
     def __init_item_manager(self):
         self.item = ItemManager(db=self.mysql)
+    def __init_import_item_manager(self):
+        self.import_item = ImportManager(db=self.mysql)
         
 
 @asynccontextmanager

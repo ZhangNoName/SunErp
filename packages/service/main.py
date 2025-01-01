@@ -1,7 +1,7 @@
 # main.py
 from fastapi.responses import RedirectResponse
 from app_instance import app  # Import the app instance
-from src.routers import order_router,user_router,item_router
+from src.routers import order_router,user_router,item_router,import_router
 
 @app.get("/")
 async def redirect_root_to_docs():
@@ -10,7 +10,8 @@ async def redirect_root_to_docs():
 routers = [
     order_router,
     user_router,
-    item_router
+    item_router,
+    import_router
 ]
 
 # 使用循环一次性添加所有路由器
