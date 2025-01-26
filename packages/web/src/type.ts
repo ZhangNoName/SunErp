@@ -1,5 +1,3 @@
-import { count } from "echarts/types/src/component/dataZoom/history.js";
-
 export type ItemStateType = "enable" | "disable" | "warning";
 
 /**
